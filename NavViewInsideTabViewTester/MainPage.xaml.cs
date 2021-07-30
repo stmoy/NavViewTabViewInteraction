@@ -1,28 +1,21 @@
 ﻿using Microsoft.UI.Xaml.Controls;
-using System;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Runtime.InteropServices.WindowsRuntime;
-using Windows.Foundation;
-using Windows.Foundation.Collections;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
-using Windows.UI.Xaml.Controls.Primitives;
-using Windows.UI.Xaml.Data;
-using Windows.UI.Xaml.Input;
-using Windows.UI.Xaml.Media;
-using Windows.UI.Xaml.Navigation;
-
-// The Blank Page item template is documented at https://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
 
 namespace NavViewInsideTabViewTester
 {
-    /// <summary>
-    /// An empty page that can be used on its own or navigated to within a Frame.
-    /// </summary>
     public sealed partial class MainPage : Page
     {
+        private List<string> pages = new List<string>()
+        {
+            "SamplePage1",
+            "SamplePage2",
+            "SamplePage3"
+        };
+
+
         public TabView RootTabView;
 
         public string RequestedPageTag = null;
@@ -81,6 +74,41 @@ namespace NavViewInsideTabViewTester
         {
             if (sender.TabItems.Count > 1)
                 sender.TabItems.Remove(args.Tab);
+        }
+
+        private void AutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var suitableItems = new List<string>();
+                var splitText = sender.Text.ToLower().Split(" ");
+                foreach (var page in pages)
+                {
+                    var found = splitText.All((key) =>
+                    {
+                        return page.ToLower().Contains(key);
+                    });
+                    if (found)
+                    {
+                        suitableItems.Add(page);
+                    }
+                }
+                if (suitableItems.Count == 0)
+                {
+                    suitableItems.Add("No results found");
+                }
+                sender.ItemsSource = suitableItems;
+            }
+
+        }
+
+        // TODO: Add the QuerySubmitted into the Xaml Controls Gallery - the ASB sample doesn't have the C# code...
+        private void AutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (!args.ChosenSuggestion.Equals("No results found"))
+            {
+                CreatNewTabAndAddToItems(args.ChosenSuggestion.ToString());
+            }
         }
     }
 }

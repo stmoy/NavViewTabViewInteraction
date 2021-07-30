@@ -10,7 +10,14 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <muxc:TabView x:Name="rootTabView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="rootTab_Loaded" AddTabButtonClick="rootTab_AddTabButtonClick" TabCloseRequested="rootTab_TabCloseRequested"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
+
+        <AutoSuggestBox HorizontalAlignment="Stretch" Margin="70,20" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" />
+
+        <muxc:TabView x:Name="rootTabView" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="rootTab_Loaded" AddTabButtonClick="rootTab_AddTabButtonClick" TabCloseRequested="rootTab_TabCloseRequested"/>
 
 
     </Grid>
