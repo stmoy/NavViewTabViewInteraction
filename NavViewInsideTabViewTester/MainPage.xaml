@@ -1,0 +1,17 @@
+﻿<Page
+    x:Class="NavViewInsideTabViewTester.MainPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:NavViewInsideTabViewTester"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:muxc="using:Microsoft.UI.Xaml.Controls"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <muxc:TabView x:Name="rootTabView" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="rootTab_Loaded" AddTabButtonClick="rootTab_AddTabButtonClick" TabCloseRequested="rootTab_TabCloseRequested"/>
+
+
+    </Grid>
+</Page>
