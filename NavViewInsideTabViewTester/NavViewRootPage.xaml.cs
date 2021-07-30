@@ -112,5 +112,47 @@ namespace NavViewInsideTabViewTester
 
 
         }
+
+        private void navViewAutoSuggestBox_TextChanged(AutoSuggestBox sender, AutoSuggestBoxTextChangedEventArgs args)
+        {
+            if (args.Reason == AutoSuggestionBoxTextChangeReason.UserInput)
+            {
+                var suitableItems = new List<string>();
+                var splitText = sender.Text.ToLower().Split(" ");
+                foreach (var page in hostPage.pages)
+                {
+                    var found = splitText.All((key) =>
+                    {
+                        return page.ToLower().Contains(key);
+                    });
+                    if (found)
+                    {
+                        suitableItems.Add(page);
+                    }
+                }
+                if (suitableItems.Count == 0)
+                {
+                    suitableItems.Add("No results found");
+                }
+                sender.ItemsSource = suitableItems;
+            }
+        }
+
+        private void navViewAutoSuggestBox_QuerySubmitted(AutoSuggestBox sender, AutoSuggestBoxQuerySubmittedEventArgs args)
+        {
+            if (!args.ChosenSuggestion.Equals("No results found"))
+            {
+                foreach (muxc.NavigationViewItem item in rootNavView.MenuItems)
+                {
+                    if (item.Tag.Equals(args.ChosenSuggestion))
+                    {
+                        rootNavView.SelectedItem = item;
+                        break;
+                    }
+                }
+            }
+        }
+
+
     }
 }

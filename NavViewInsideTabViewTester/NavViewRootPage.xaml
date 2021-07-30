@@ -10,6 +10,13 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <muxc:NavigationView x:Name="rootNavView" SelectionChanged="NavigationView_SelectionChanged">
+
+        <muxc:NavigationView.AutoSuggestBox>
+            <AutoSuggestBox x:Name="navViewAutoSuggestBox" QueryIcon="Find" TextChanged="navViewAutoSuggestBox_TextChanged" QuerySubmitted="navViewAutoSuggestBox_QuerySubmitted" />
+        </muxc:NavigationView.AutoSuggestBox>
+
+
+
         <Frame x:Name="rootFrame" />
 
     </muxc:NavigationView>

@@ -8,7 +8,7 @@ namespace NavViewInsideTabViewTester
 {
     public sealed partial class MainPage : Page
     {
-        private List<string> pages = new List<string>()
+        public List<string> pages = new List<string>()
         {
             "SamplePage1",
             "SamplePage2",
