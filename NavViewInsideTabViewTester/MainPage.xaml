@@ -15,7 +15,7 @@
             <RowDefinition Height="*" />
         </Grid.RowDefinitions>
 
-        <AutoSuggestBox HorizontalAlignment="Stretch" Margin="70,20" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" />
+        <AutoSuggestBox HorizontalAlignment="Stretch" PlaceholderText="Search" Margin="70,20" TextChanged="AutoSuggestBox_TextChanged" QuerySubmitted="AutoSuggestBox_QuerySubmitted" QueryIcon="Find" Visibility="Visible" />
 
         <muxc:TabView x:Name="rootTabView" Grid.Row="1" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Loaded="rootTab_Loaded" AddTabButtonClick="rootTab_AddTabButtonClick" TabCloseRequested="rootTab_TabCloseRequested"/>
 
